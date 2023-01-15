@@ -1,0 +1,165 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-12-23 18:09+0200\n"
+"PO-Revision-Date: 2022-12-23 18:42+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Core/Controllers/Main/ControllerWebSmarty.php:36
+#: Core/Controllers/Main/ControllerWebSmarty.php:41
+msgid "This variable can not be used in this place:"
+msgstr "Ця змінна не може бути використана у цьому місьці"
+
+#: Core/Controllers/System/ControllerCli/AddcontrollerController.php:28
+msgid "Allowed engines:"
+msgstr "Дозволені движки:"
+
+#: Core/Controllers/System/ControllerCli/AddcontrollerController.php:55
+msgid "Folder not exists"
+msgstr "Директорія не існує"
+
+#: Core/Controllers/System/ControllerCli/AddcontrollerController.php:93
+msgid "File exists:"
+msgstr "Файл існує:"
+
+#: Core/Controllers/System/ControllerCli/AddcontrollerController.php:101
+msgid "Required parameter missing:"
+msgstr "Необїідний параметр відсутній:"
+
+#: Core/Helpers/DateTimeHelper.php:30
+msgid "Empty date in processDate"
+msgstr "Порожня дата у processDate"
+
+#: Core/Instances/Route.php:23 Core/Instances/Route.php:31
+msgid "Param in router not found"
+msgstr "Параметр у роутері не знайдено"
+
+#: Core/Request.php:298
+msgid "Invalid method, need"
+msgstr "Неправильний метод, повинен бути"
+
+#: Core/Request.php:304
+msgid "Need header:"
+msgstr "Необхідний заголовок:"
+
+#: Core/Request.php:313
+msgid "You need to fill these field:"
+msgstr "Вам необхідно заповнити це поле:"
+
+#: Core/ErrorHandling/Templates/View.phtml:14
+msgid "Response"
+msgstr "Ответ"
+
+#: Core/ErrorHandling/Templates/View.phtml:17
+msgid "Errors"
+msgstr "Ошибки"
+
+#: Core/ErrorHandling/Templates/View.phtml:31
+msgid "Fatal Error"
+msgstr "Фатальна помилка"
+
+#: Core/Templates/error404.phtml:9
+msgid "Page not found"
+msgstr "Сторінка не знайдена"
+
+#: Core/Templates/error404.phtml:17
+msgid "Terrorists win!"
+msgstr "Terrorists win!"
+
+#: Core/Templates/error404.phtml:17
+msgid "Method not allowed"
+msgstr "Метод не дозволено"
+
+#: Core/Templates/error404.phtml:19
+msgid "Are your thoughts impure?"
+msgstr "Ваші думки чисті?"
+
+#: Core/Templates/error404.phtml:21
+msgid "Please take me home!"
+msgstr "Буль ласка, заберіть мене додому!"
+
+#: Core/Templates/index_placeholder.phtml:20
+msgid "Lame PHP engine placeholder page"
+msgstr "Базова сторінка Lame PHP engine"
+
+#: Core/Templates/index_placeholder.phtml:21
+msgid ""
+"As long as you haven't created a main controller (IndexController by "
+"default) and an indexed master page (indexAction by default), this stub will "
+"be displayed."
+msgstr ""
+"Доки ви не створите головний контролер (IndexController за замовчанням) та "
+"індексний екшн (indexAction за замовчанням), ця заглушка буде тут."
+
+#: Core/Templates/index_placeholder.phtml:22
+msgid "Routing"
+msgstr "Маршрутизація"
+
+#: Core/Templates/index_placeholder.phtml:25
+msgid ""
+"Pages are displayed as follows: https://site.com/en/page1. In the case of "
+"the main page of the site, if the default language is used, then it will not "
+"be displayed. For example, if the default language in the configuration file "
+"is Russian, then the address of the main page will be: https://site.com but "
+"if you need to display the page in another language, then the mainpage "
+"address will be https://site.com/es"
+msgstr ""
+"Сторінки будуть показані як https://site.com/en/page1. У випадку головної "
+"сторінки сайту, коли активна мова за замовчанням, мова не буде показуватись. "
+"Для прикладу, коли мова за замовчанням вибрана як Російська у файлі "
+"конфігурації, адреса головної буде: https://site.com але якщо ви забажаєте "
+"показати сторінку іншою мовою, тоді головна буде https ://site.com/es"
+
+#: Core/Templates/index_placeholder.phtml:26
+msgid ""
+"The address format is as follows: https://site.com/{LANG}/{CONTROLLER}/"
+"{ACTION}/{PARAMS}"
+msgstr ""
+"Формат адресу зазвичай такий: https://site.com/{LANG}/{CONTROLLER}/{ACTION}/"
+"{PARAMS}"
+
+#: Core/Templates/index_placeholder.phtml:29
+msgid "Example of web controller for Smarty template engine"
+msgstr "Приклад веб контролена з використанням SMARTY"
+
+#: Core/Templates/index_placeholder.phtml:31
+#: Core/Templates/index_placeholder.phtml:53
+msgid "file"
+msgstr "файл"
+
+#: Core/Templates/index_placeholder.phtml:31
+msgid "route"
+msgstr "маршрут"
+
+#: Core/Templates/index_placeholder.phtml:49
+msgid ""
+"In this example, the template ./App/Themes/Main/mytemplate.tpl (must be "
+"exists!) will be included in which there will be a Smarty variable {$myvar}"
+msgstr ""
+"У цьому прикладі, шаблон ./App/Themes/Main/mytemplate.tpl (повинен "
+"існувати!) у потрібному місці буде відображено змінну {$myvar} (повинна бути "
+"у шаблоні)"
+
+#: Core/Templates/index_placeholder.phtml:51
+msgid "Example of web controller for clean Php template engine"
+msgstr "Приклад веб контролера з використанням чистого PHP виводу"
+
+#: Core/Templates/index_placeholder.phtml:53
+msgid "routes"
+msgstr "маршрути"
+
+#~ msgid "test message"
+#~ msgstr "Тестове повідомлення"
+
+#~ msgid "Test message"
+#~ msgstr "Тестове повідомлення"

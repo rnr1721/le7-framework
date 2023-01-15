@@ -1,0 +1,57 @@
+; LameEngine config file. Please do not remove any strings from this file
+[general]
+; script version
+scriptVersion = 1;
+; Set production or development state
+is_production = false
+; Name of project
+projectName = "My Sample Project"
+; Default controller
+defaultController = "index"
+; Default action
+defaultAction = "index"
+; Controller for 404 pagw
+notfoundController = "notfound"
+; Choose timezone
+timeZone = "Europe/Kiev"
+; Folder with HTML theme
+theme = "Main"
+; Error Reporting
+errorReporting = true
+; Var folder for cache/logs/temp etc
+dirVar = "var"
+; Web routing rules. Default is {language}/{controller}/{action}
+; but possible is {controller}/{action} or {action}
+; in multilanguage mode please leave default value
+webRouting = "{language}/{controller}/{action}"
+apiRouting = "{controller}/{action}"
+; Remove duplicate for default language on mainpage
+removeDuplicateMainpage = true
+
+[api]
+allowedMethods = "POST, GET, OPTIONS, PUT, DELETE"
+allowedHeaders = "Content-Type, Origin, Authorizations, User-Agent, Host, Authorization, Content-Length, Accept, X-Requested-With, X-Auth-Token, Content-Language, Source"
+
+[headers]
+; no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+referrerPolicy = "no-referrer-when-downgrade"
+contentSecurityPolicy = "default-src 'self'"
+strictTransportSecurity = "max-age=7776000"
+xContentTypeOptions = "nosniff"
+; deny or SAMEORIGIN
+xFrameOptions = "SAMEORIGIN"
+xXssProtection = "1; mode=block"
+
+[smarty]
+leftDelimiter = "{"
+rightDelimiter = "}"
+
+[locales]
+defaultLanguage = "en"
+locales[ru] = "ru_RU|Русский"
+locales[en] = "en_US|English"
+locales[ua] = "uk_UA|Українська"
+
+[daemon]
+
+[users]

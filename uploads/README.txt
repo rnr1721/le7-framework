@@ -1,0 +1,1 @@
+Internal folder for uploads

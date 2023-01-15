@@ -1,0 +1,13 @@
+/nbproject/private/
+/.idea/
+/vendor/
+/logs/
+/var/
+/composer.lock
+/Config/config.ini
+/Config/dbconfig.ini
+/htdocs/Libs/
+/htdocs/libs/axios/
+/htdocs/libs/bootstrap5/
+/htdocs/libs/fontawesome6/
+/htdocs/libs/vuejs3/
