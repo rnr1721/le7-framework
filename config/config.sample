@@ -28,6 +28,10 @@ apiRouting = "{controller}/{action}"
 ; Remove duplicate for default language on mainpage
 removeDuplicateMainpage = true
 
+[sessions]
+; Lax or Strict
+samesite = "Lax"
+
 [api]
 allowedMethods = "POST, GET, OPTIONS, PUT, DELETE"
 allowedHeaders = "Content-Type, Origin, Authorizations, User-Agent, Host, Authorization, Content-Length, Accept, X-Requested-With, X-Auth-Token, Content-Language, Source"
