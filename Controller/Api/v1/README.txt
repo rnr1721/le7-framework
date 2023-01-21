@@ -3,9 +3,9 @@ for example:
 
 <?php
 
-namespace le7\Api\v1;
+namespace le7\Controller\Api\v1;
 
-use le7\controllers\ControllerApi;
+use le7\Controller\ControllerApi;
 
 class IndexController extends ControllerApi {
 

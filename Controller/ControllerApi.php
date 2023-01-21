@@ -1,6 +1,6 @@
 <?php
 
-namespace le7\controllers;
+namespace le7\Controller;
 
 use le7\Core\Controllers\Main\Api;
 

@@ -18,7 +18,7 @@ return array(
         'key' => 'admin',
         'type' => 'web',
         'address' => 'admin',
-        'namespace' => 'le7\Web\Admin',
+        'namespace' => 'le7\Controller\Web\Admin',
         'paramsCount' => 7,
         'namespaceSystem' => ''
     ],
@@ -26,7 +26,7 @@ return array(
         'key' => 'apiv1',
         'type' => 'api',
         'address' => 'api/v1',
-        'namespace' => 'le7\Api\v1',
+        'namespace' => 'le7\Controller\Api\v1',
         'paramsCount' => 7,
         'namespaceSystem' => ''
     ]

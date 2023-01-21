@@ -3,9 +3,9 @@ for example:
 
 <?php
 
-namespace le7\Cli;
+namespace le7\Controller\Cli;
 
-use le7\controllers\ControllerCli;
+use le7\Controller\ControllerCli;
 
 class TestController extends ControllerCli {
 

@@ -101,7 +101,7 @@ return array(
         'key' => 'admin',
         'type' => 'web',
         'address' => 'admin',
-        'namespace' => 'le7\Web\Admin',
+        'namespace' => 'le7\Controller\Web\Admin',
         'paramsCount' => 7,
         'namespaceSystem' => ''
     ],
@@ -109,7 +109,7 @@ return array(
         'key' => 'apiv1',
         'type' => 'api',
         'address' => 'api/v1',
-        'namespace' => 'le7\Api\v1',
+        'namespace' => 'le7\Controller\Api\v1',
         'paramsCount' => 7,
         'namespaceSystem' => ''
     ]
@@ -122,7 +122,7 @@ return array(
         'key' => 'web',
         'type' => 'web',
         'address' => '',
-        'namespace' => 'le7\Web',
+        'namespace' => 'le7\Controller\Web',
         'paramsCount' => 7,
         'namespaceSystem' => ''
     ],
@@ -143,9 +143,9 @@ return array(
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWebSmarty;
+use le7\Controller\ControllerWebSmarty;
 
 class TestController extends ControllerWebSmarty {
     
@@ -166,9 +166,9 @@ test page
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWebPhp;
+use le7\Controller\ControllerWebPhp;
 
 class TestController extends ControllerWebPhp {
     
@@ -187,9 +187,9 @@ class TestController extends ControllerWebPhp {
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWebSmarty;
+use le7\Controller\ControllerWebSmarty;
 
 class TestController extends ControllerWebSmarty {
     
@@ -221,9 +221,9 @@ class TestController extends ControllerWebSmarty {
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWebSmarty;
+use le7\Controller\ControllerWebSmarty;
 
 class ProductController extends ControllerWebSmarty {
     
@@ -254,9 +254,9 @@ Array
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWeb;
+use le7\Controller\ControllerWeb;
 
 class ProductController extends ControllerWeb {
     
@@ -288,9 +288,9 @@ echo 'параметр ' . $this->request->wp('id',null);
 ```php
 <?php
 
-namespace le7\Api\v1;
+namespace le7\Controller\Api\v1;
 
-use le7\controllers\ControllerApi;
+use le7\Controller\ControllerApi;
 
 class ProductController extends ControllerApi {
 
@@ -328,9 +328,9 @@ echo 'параметр ' . $this->request->wp('name','Василий'); //Вер
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWeb;
+use le7\Controller\ControllerWeb;
 
 class TestController extends ControllerWeb {
     
@@ -358,9 +358,9 @@ Array
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWeb;
+use le7\Controller\ControllerWeb;
 
 class TestController extends ControllerWeb {
     
@@ -391,7 +391,7 @@ Array
 ```php
 <?php
 
-namespace le7\custom\libraries;
+namespace le7\Custom;
 
 use le7\Core\ClassLibraries\LibraryHelpers;
 
@@ -403,7 +403,7 @@ class UserHelpersLibrary extends LibraryHelpers {
 ```php
 <?php
 
-namespace le7\custom\libraries;
+namespace le7\Custom;
 
 use le7\Core\ClassLibraries\LibraryHelpers;
 
@@ -419,9 +419,9 @@ class UserHelpersLibrary extends LibraryHelpers {
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWeb;
+use le7\Controller\ControllerWeb;
 
 class TestController extends ControllerWeb {
     
@@ -441,9 +441,9 @@ class TestController extends ControllerWeb {
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWeb;
+use le7\Controller\ControllerWeb;
 
 class TestController extends ControllerWeb {
     
@@ -476,7 +476,7 @@ return array(
 ```php 
 <?php
 
-use le7\classes\MyClass;
+use le7\Classes\MyClass;
 use Psr\Container\ContainerInterface;
 use function DI\factory;
 
@@ -491,9 +491,9 @@ return array(
 ```php
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWeb;
+use le7\Controller\ControllerWeb;
 
 class TestController extends ControllerWeb {
     

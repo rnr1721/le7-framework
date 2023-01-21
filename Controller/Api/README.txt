@@ -5,7 +5,7 @@ After adding folder You need to add route for it in ./config/routes.php
         'key' => 'apiv2',
         'type' => 'api',
         'address' => 'api/v2',
-        'namespace' => 'le7\Api\v2',
+        'namespace' => 'le7\Controller\Api\v2',
         'paramsCount' => 7,
         'namespaceSystem' => ''
     ]
@@ -14,9 +14,9 @@ After it, you can place controller to ./Api/v2:
 
 <?php
 
-namespace le7\Api\v2;
+namespace le7\Controller\Api\v2;
 
-use le7\controllers\ControllerApi;
+use le7\Controller\ControllerApi;
 
 class IndexController extends ControllerApi {
 
@@ -34,9 +34,9 @@ or another example:
 
 <?php
 
-namespace le7\Api\v2;
+namespace le7\Controller\Api\v2;
 
-use le7\controllers\ControllerApi;
+use le7\Controller\ControllerApi;
 
 class TestController extends ControllerApi {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace le7\Cli;
+namespace le7\Controllers\Cli;
 
 use le7\controllers\ControllerCli;
 use le7\Core\Helpers\ConsoleHelper;

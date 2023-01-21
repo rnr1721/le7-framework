@@ -1,6 +1,6 @@
 <?php
 
-namespace le7\custom\libraries;
+namespace le7\Custom;
 
 use le7\Core\GlobalEnvironment;
 

@@ -3,9 +3,9 @@ for example:
 
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWebSmarty;
+use le7\Controller\ControllerWebSmarty;
 
 class IndexController extends ControllerWebSmarty {
 
@@ -23,9 +23,9 @@ on mainpage (IndexController) you can have only one action - indexAction;
 Another example:
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWebSmarty;
+use le7\Controller\ControllerWebSmarty;
 
 class IndexController extends ControllerWebSmarty {
 
@@ -42,9 +42,9 @@ Another example:
 
 <?php
 
-namespace le7\Web;
+namespace le7\Controller\Web;
 
-use le7\controllers\ControllerWeb;
+use le7\Controller\ControllerWeb;
 
 class TestController extends ControllerWeb {
 
