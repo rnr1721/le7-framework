@@ -59,3 +59,10 @@ locales[ua] = "uk_UA|Українська"
 [daemon]
 
 [users]
+
+[debug]
+; Turn on debug bar in non-production mode
+; In production mode debugbar will stay turned off
+include = true
+; Comma separated IPs to allow debugbar in non-production mode
+allowedIp = "127.0.0.1"
