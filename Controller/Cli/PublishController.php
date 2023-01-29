@@ -1,8 +1,8 @@
 <?php
 
-namespace le7\Controllers\Cli;
+namespace le7\Controller\Cli;
 
-use le7\controllers\ControllerCli;
+use le7\Controller\ControllerCli;
 use le7\Core\Helpers\ConsoleHelper;
 use Psr\Container\ContainerInterface;
 use \ZipArchive;
