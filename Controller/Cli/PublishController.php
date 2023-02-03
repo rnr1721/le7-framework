@@ -2,9 +2,11 @@
 
 namespace le7\Controller\Cli;
 
+use le7\Core\Instances\RouteInterface;
+use le7\Core\GlobalEnvironment;
+
 use le7\Controller\ControllerCli;
 use le7\Core\Helpers\ConsoleHelper;
-use Psr\Container\ContainerInterface;
 use \ZipArchive;
 
 class PublishController extends ControllerCli {
@@ -30,9 +32,9 @@ class PublishController extends ControllerCli {
     private string $urlFontawesome6 = "https://github.com/FortAwesome/Font-Awesome/archive/refs/heads/6.x.zip";
     private string $urlAxios = "https://github.com/axios/axios/archive/refs/heads/v1.x.zip";
 
-    public function __construct(ContainerInterface $container) {
-        parent::__construct($container);
-        $this->consoleMsg = $container->get('helper.console');
+    public function __construct(GlobalEnvironment $env, RouteInterface $route, ConsoleHelper $consoleMsg) {
+        parent::__construct($env, $route);
+        $this->consoleMsg = $consoleMsg;
         $this->libsDir = $this->topologyFs->getPublicPath() . DIRECTORY_SEPARATOR . 'libs';
         if (!file_exists($this->libsDir)) {
             mkdir($this->libsDir, 0775, true);

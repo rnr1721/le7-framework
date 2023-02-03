@@ -1,0 +1,55 @@
+<?php
+
+use le7\Core\View\Php\PhpView;
+
+/** @var PhpView $this */
+
+$this->setPageTitle('rrrrrr');
+
+$this->setPageDescription("page description");
+
+$this->setPageKeywords(["keyword1","keyword2","keyword3"]);
+
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $lang ?>">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="<?php echo $description; ?>">
+        <meta name="keywords" content="<?php $this->e('keywords'); ?>" />
+        <title><?php $this->e('title'); ?> - <?php echo $config->getProjectName() ?></title>
+        <?php $this->e('styles'); ?>
+        <?php $this->e('env') ?>
+        <?php $this->e('scripts_header'); ?>
+        <?php echo $snippets_top; ?>
+    </head>
+    <body>
+        <?php echo $snippets_middle; ?>
+        <h3><?php echo _("Url operations") ?></h3>
+        <ul>
+            <li>
+                <?php echo $mkUrl->get(); ?>
+            </li>
+            <li>
+                <?php echo $mkUrl->get('mycontroller'); ?>
+            </li>
+            <li>
+                <?php echo $mkUrl->get('mycontroller',"myaction","?param1=test",""); ?>
+            </li>
+            <li>
+                <?php echo $mkUrl->get('mycontroller',"myaction","?param1=test","admin"); ?>
+            </li>
+            <li>
+                <?php echo $mkUrl->get('mycontroller',"myaction","?param1=test","","ru"); ?>
+            </li>
+        </ul>
+        <h3><?php _("Print_r of route") ?></h3>
+        <pre>
+        <?php print_r($route) ?>
+        <?php echo $scripts_footer ?>
+</pre>
+        <?php echo $snippets_bottom; ?>
+    </body>
+</html>
