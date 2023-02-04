@@ -4,7 +4,7 @@ use le7\Core\View\Php\PhpView;
 
 /** @var PhpView $this */
 
-$this->setPageTitle('rrrrrr');
+$this->setPageTitle('le7 test page');
 
 $this->setPageDescription("page description");
 
@@ -17,12 +17,12 @@ $this->setPageKeywords(["keyword1","keyword2","keyword3"]);
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="description" content="<?php echo $description; ?>">
-        <meta name="keywords" content="<?php $this->e('keywords'); ?>" />
-        <title><?php $this->e('title'); ?> - <?php echo $config->getProjectName() ?></title>
-        <?php $this->e('styles'); ?>
-        <?php $this->e('env') ?>
-        <?php $this->e('scripts_header'); ?>
+        <meta name="description" content="<?php echo $this->e($description); ?>">
+        <meta name="keywords" content="<?php echo $this->e($keywords); ?>" />
+        <title><?= $this->e($title); ?> - <?php echo $config->getProjectName() ?></title>
+        <?php echo $styles; ?>
+        <?php echo $env ?>
+        <?php echo $scripts_header; ?>
         <?php echo $snippets_top; ?>
     </head>
     <body>
@@ -30,19 +30,19 @@ $this->setPageKeywords(["keyword1","keyword2","keyword3"]);
         <h3><?php echo _("Url operations") ?></h3>
         <ul>
             <li>
-                <?php echo $mkUrl->get(); ?>
+                <?php echo $url->get(); ?>
             </li>
             <li>
-                <?php echo $mkUrl->get('mycontroller'); ?>
+                <?php echo $url->get('mycontroller'); ?>
             </li>
             <li>
-                <?php echo $mkUrl->get('mycontroller',"myaction","?param1=test",""); ?>
+                <?php echo $url->get('mycontroller',"myaction","?param1=test",""); ?>
             </li>
             <li>
-                <?php echo $mkUrl->get('mycontroller',"myaction","?param1=test","admin"); ?>
+                <?php echo $url->get('mycontroller',"myaction","?param1=test","admin"); ?>
             </li>
             <li>
-                <?php echo $mkUrl->get('mycontroller',"myaction","?param1=test","","ru"); ?>
+                <?php echo $url->get('mycontroller',"myaction","?param1=test","","ru"); ?>
             </li>
         </ul>
         <h3><?php _("Print_r of route") ?></h3>

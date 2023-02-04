@@ -12,3 +12,6 @@
 /htdocs/libs/bootstrap5/
 /htdocs/libs/fontawesome6/
 /htdocs/libs/vuejs3/
+/config/stat_bottom.txt
+/config/stat_middle.txt
+/config/stat_top.txt
