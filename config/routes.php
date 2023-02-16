@@ -10,6 +10,7 @@
  * @param string namespace - namespace, where system finds class of controller
  * @param int paramsCount - params in URL,
  * @param string namespaceSystem (optional) reserve namespace for controller place
+ * @param bool multilang - if true, it will create multiple routes for each language
  * 
  * if namespaceSystem is empty, system will set default namespace by type
  */
@@ -20,7 +21,8 @@ return array(
         'address' => 'admin',
         'namespace' => 'le7\Controller\Web\Admin',
         'paramsCount' => 7,
-        'namespaceSystem' => ''
+        'namespaceSystem' => '',
+        'multilang' => true
     ],
     'apiv1' => [
         'key' => 'apiv1',
@@ -28,6 +30,7 @@ return array(
         'address' => 'api/v1',
         'namespace' => 'le7\Controller\Api\v1',
         'paramsCount' => 7,
-        'namespaceSystem' => ''
+        'namespaceSystem' => '',
+        'multilang' => false
     ]
 );

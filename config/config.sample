@@ -20,13 +20,8 @@ theme = "Main"
 errorReporting = true
 ; Var folder for cache/logs/temp etc
 dirVar = "var"
-; Web routing rules. Default is {language}/{controller}/{action}
-; but possible is {controller}/{action} or {action}
-; in multilanguage mode please leave default value
-webRouting = "{language}/{controller}/{action}"
-apiRouting = "{controller}/{action}"
-; Remove duplicate for default language on mainpage
-removeDuplicateMainpage = true
+; Storage for flash messages - "session" or "cookies"
+flashMessageStorage = "session"
 
 [sessions]
 ; Lax or Strict
