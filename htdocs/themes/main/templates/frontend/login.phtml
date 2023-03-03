@@ -1,0 +1,37 @@
+<?php
+
+use le7\Core\Config\ConfigInterface;
+use le7\Core\Helpers\UrlHelper;
+use le7\Core\View\Php\PhpView;
+use le7\Core\Messages\MessageCollectionInterface;
+
+/** @var ConfigInterface $config */
+/** @var PhpView $this */
+/** @var UrlHelper $url */
+/** @var MessageCollectionInterface $messages */
+?>
+<main class="form-signin">
+    <form method="POST" action="<?php echo $url->get('login', 'signin', '', 'admin'); ?>">
+        <h1 class="h3 mb-3 fw-normal"><?php echo _('Please sign in'); ?></h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="login" name="login" placeholder="<?php echo _('Login'); ?>" required>
+            <label for="login"><?php echo _('login'); ?></label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="<?php echo _('Password'); ?>" required>
+            <label for="password"><?php echo _('password'); ?></label>
+        </div>
+        <?php if ($config->getUserLoginVerification()): ?>
+            <div>
+                <div id="vcode_input" class="form-floating">
+                    <input type="text" class="form-control" id="vcode" name="vcode" placeholder="<?php echo _('Verification code'); ?>" required>
+                    <label for="vcode"><?php echo _('Verification code'); ?></label>
+                </div>
+                <button id="vcode_button" class="w-100 btn btn-lg btn-primary" type="button"><?php echo _('Get verification code on email'); ?></button>
+            </div>
+        <script type="text/javascript" src="<?php echo $urlJs; ?>/login.js"></script>
+        <?php endif; ?>
+        <button class="w-100 btn btn-lg btn-primary" type="submit"><?php echo _('Sign in'); ?></button>
+    </form>
+</main>

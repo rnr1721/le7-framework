@@ -54,6 +54,7 @@ locales[ua] = "uk_UA|Українська"
 [daemon]
 
 [users]
+userManagement = true
 
 [debug]
 ; Turn on debug bar in non-production mode

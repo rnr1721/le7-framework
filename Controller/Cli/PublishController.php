@@ -2,8 +2,7 @@
 
 namespace le7\Controller\Cli;
 
-use le7\Core\GlobalEnvironment;
-
+use le7\Core\Helpers\FilesystemHelper;
 use le7\Controller\ControllerCli;
 use le7\Core\Helpers\ConsoleHelper;
 use \ZipArchive;
@@ -11,6 +10,7 @@ use \ZipArchive;
 class PublishController extends ControllerCli {
 
     private string $libsDir;
+    private FilesystemHelper $filesystem;
     private ConsoleHelper $consoleMsg;
     private array $urlsVue3 = array(
         "https://unpkg.com/browse/vue@3.2.36/dist/vue.cjs.js",
@@ -31,8 +31,8 @@ class PublishController extends ControllerCli {
     private string $urlFontawesome6 = "https://github.com/FortAwesome/Font-Awesome/archive/refs/heads/6.x.zip";
     private string $urlAxios = "https://github.com/axios/axios/archive/refs/heads/v1.x.zip";
 
-    public function __construct(GlobalEnvironment $env, ConsoleHelper $consoleMsg) {
-        parent::__construct($env);
+    public function __construct(ConsoleHelper $consoleMsg, FilesystemHelper $filesystem) {
+        $this->filesystem = $filesystem;
         $this->consoleMsg = $consoleMsg;
         $this->libsDir = $this->topologyFs->getPublicPath() . DIRECTORY_SEPARATOR . 'libs';
         if (!file_exists($this->libsDir)) {
@@ -61,8 +61,8 @@ class PublishController extends ControllerCli {
         $ds = DIRECTORY_SEPARATOR;
         $tmpZip = $this->topologyFs->getTempDir() . $ds . $name . '.zip';
         $final = $this->topologyFs->getPublicLibsDir() . $ds . $name;
-        $this->helpers->getFilesystem()->recursiveRemoveDirectory($final);
-        $this->helpers->getFilesystem()->downloadFilePhp($url, $tmpZip);
+        $this->filesystem->recursiveRemoveDirectory($final);
+        $this->filesystem->downloadFilePhp($url, $tmpZip);
         $zip = new ZipArchive;
         $res = $zip->open($tmpZip);
         if ($res === true) {
@@ -89,7 +89,7 @@ class PublishController extends ControllerCli {
 
         $destDir = $this->libsDir . $ds . 'vuejs3';
 
-        $this->helpers->getFilesystem()->recursiveRemoveDirectory($destDir);
+        $this->filesystem->recursiveRemoveDirectory($destDir);
 
         if (!file_exists($destDir)) {
             mkdir($destDir, 0775, true);
@@ -99,7 +99,7 @@ class PublishController extends ControllerCli {
             $filename = basename($url);
             $dest = $destDir . $ds . $filename;
             echo _('Downloading:') . ' ' . $filename . "\r\n";
-            $this->helpers->getFilesystem()->downloadFileCurl($url, $dest);
+            $this->filesystem->downloadFileCurl($url, $dest);
         }
         $this->stdout($this->consoleMsg->colorMessage('vue.js 3' . ' ' . _('published'), 'green'));
     }
