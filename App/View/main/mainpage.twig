@@ -1,0 +1,27 @@
+<div class="jumbotron jumbotron-fluid"> 
+    <div class="container">
+        <img class="mx-auto d-block" alt="{{ projectName }}" width="75%" src="{{ images }}/logo_red.svg"/>
+        <h1>{{ _("Lame PHP engine placeholder page") }}</h1>
+        <p class="lead">{{ "As long as you haven't created a main controller (IndexController by default) and an indexed master page (indexAction by default), this stub will be displayed."|trans }}</p>
+
+        <p>
+        <ul>
+            <li><a href="{{ url.get('phpinfo') }}">phpinfo</a></li>
+        </ul>
+        </p>
+        <p>{{ "Project page:"|trans }} <a rel="nofollow" href="https://github.com/rnr1721/le7-framework">https://github.com/rnr1721/le7-framework</a></p>
+    </div>
+    <div>
+        <form method="POST" action="{{ url }}">
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username">
+            <label for="password">Password</label>
+            <input id="password" type="text" name="password">
+            <label for="mynumber">Number from 20 to 40</label>
+            <input id="mynumber" type="text" name="mynumber">
+            {{ csrf|raw }}
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+</div>

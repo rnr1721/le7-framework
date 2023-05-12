@@ -1,0 +1,1 @@
+Place for js and css libraries - jquery, vuejs, bootstrap etc

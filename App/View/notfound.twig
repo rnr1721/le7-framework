@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex">
+        <title>Page not found</title>
+        {{ styles|raw }}
+        {{ scripts_header|raw }}
+    </head>
+
+    <body>
+        <div class="d-flex align-items-center justify-content-center vh-100">
+            <div class="text-center">
+                <h1 class="display-1 fw-bold">404</h1>
+                <p class="fs-3"> <span class="text-danger">{{  "Terrorists win!"|trans }}</span> {{ 'Method not allowed'|trans }}</p>
+                <p class="lead">
+                    {{ "Are your thoughts impure?"|trans }}
+                </p>
+                <a href="{{ url }}" class="btn btn-primary">{{ "Please take me home!"|trans }} </a>
+            </div>
+        </div>
+        {{ scripts_footer|raw }}
+    </body>
+
+</html>

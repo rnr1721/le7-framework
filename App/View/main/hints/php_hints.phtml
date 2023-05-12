@@ -1,0 +1,44 @@
+<?php
+
+use Core\Interfaces\Url;
+use Core\Interfaces\Config;
+use Core\Interfaces\RouteHttp;
+use Core\View\Php\PhpRenderEngine;
+
+/** @var PhpRenderEngine $this */
+/** @var Url $url */
+/** @var Config $config */
+/** @var RouteHttp $route */
+
+/**
+ * Keep this header from top to have IDE hints
+ * You can include templates from template folder
+ * in this way: $this->include('mytemplate.phtml');
+ */
+
+/**
+ * @var string $env Environment for JavaScript - constants for api urls, current language and other. User can add own in user.ini, [environment part]
+ * @var string $lang Current language shortname
+ * @var string $url base Url with subfolder if it
+ * @var string $libs Url for libs public dir - for jquery, bootstrap etc /libs
+ * @var string $themes Url for themes catalog in public folder /themes
+ * @var string $theme Url for current theme catalog in public folder /themes/{theme}
+ * @var string $css Url for current theme Css catalog in public folder /themes/{theme}/css
+ * @var string $js Url for current theme Js catalog in public folder /themes/{theme}/js
+ * @var string $images Url for current theme images catalog in public folder /themes/{theme}/images
+ * @var string $fonts Url for current theme fonts catalog in public folder /themes/{theme}/fonts
+ * @var array $route array - current route parametres as array
+ * @var array $otherLanguages Links for current page in other languages
+ * @var string $styles Styles for html header part. Can be link in controller $this->setStyle('mystyle.css')
+ * @var string $title Page title, can be set in controller $this->setPageTitle('page title here');
+ * @var string $header Page header string, can be set in controller $this->setPageHeader('Page options');
+ * @var string $scripts_header Scripts for html header part. Can be link in controller $this->setScript('mystyle.js')
+ * @var string $scripts_footer Scripts for html footer part. Can be link in controller $this->setScript('mystyle.js')
+ * @var string $microformat Microformat settings
+ * @var string $keywords - keywords. Can be set in controller in $this->setKeywords('one,two,three');
+ * @var string $description Description. Can be set in controller in $this->setDescription('desc here');
+ * @var array $messages Array of system and user messages - alerts, info, errors etc
+ * @var string $projectName Project name from config.ini
+ * @var string $content Content filename for include if it declared in controller or template top
+ * @var Url $url - generate Url using site rules e.g. $mkurl->get('mycontroller/myaction'); 
+*/
