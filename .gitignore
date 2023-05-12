@@ -3,8 +3,15 @@
 /.idea/
 /vendor/
 /logs/
-/var/
 /config/stat_bottom.txt
 /config/stat_middle.txt
 /config/stat_top.txt
 /public/libs/debugbar/
+/var/cache/*
+/var/containers/proxies/*
+/var/logs/*
+/var/routes/*
+/var/sessions/*
+/var/temp/*
+/var/templates_cache/*
+/var/templates_compiled/*
