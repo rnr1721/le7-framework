@@ -15,3 +15,10 @@
 /var/temp/*
 /var/templates_cache/*
 /var/templates_compiled/*
+!/var/cache/README.md
+!/var/containers/proxies/README.md
+!/var/logs/README.md
+!/var/sessions/README.md
+!/var/temp/README.md
+!/var/templates_cache/README.md
+!/var/templates_compiled/README.md
