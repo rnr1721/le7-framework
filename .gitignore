@@ -22,3 +22,4 @@
 !/var/temp/README.md
 !/var/templates_cache/README.md
 !/var/templates_compiled/README.md
+/composer.lock
