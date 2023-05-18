@@ -14,6 +14,6 @@ return [
     }),
     RulesLoaderInterface::class => factory(function(){
         // Namespace where Entify will find rules
-        return new RulesLoaderClass('\\App\\Entity\\');
+        return new RulesLoaderClass('\\App\\Model\\');
     })
 ];

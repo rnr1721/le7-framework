@@ -31,9 +31,10 @@
         "rnr1721/le7-view-twig": "^1.0",
         "rnr1721/le7-view-smarty": "^1.0",
         "rnr1721/psr7-server": "^1.0",
+        "rnr1721/le7-entify": "^1.0",
+        "rnr1721/le7-db-redbean": "^1.0",
         "php-di/php-di": "^7.0",
-        "nyholm/psr7": "^1.5",
-        "rnr1721/le7-entify": "^1.0"
+        "nyholm/psr7": "^1.5"
     },
     "require-dev": {
         "vimeo/psalm": "^5.7",

@@ -4,11 +4,13 @@ use Core\Interfaces\RouteHttp;
 use Core\Interfaces\CodeSnippets;
 use Core\Interfaces\Locales;
 use Core\Interfaces\ViewTopology;
+use Core\Interfaces\AssetsCollection;
 use Core\Interfaces\WebPage;
 use Core\Interfaces\Config;
 use Core\Interfaces\Url;
 use Core\View\WebPageGeneric;
 use Core\View\ViewTopologyGeneric;
+use Core\View\AssetsCollectionGeneric;
 use Core\CodeParts\CodeSnippetsDefault;
 use Core\JsEnv\Adapters\JsEnvHtml;
 use Core\JsEnv\JsEnvDefault;
@@ -41,7 +43,7 @@ return [
         /** @var Config $config */
         $config = $c->get(Config::class);
 
-        $assets = $config->array('assets') ?? ['scripts' => [], 'styles' => []];
+        
 
         /** @var Url $url */
         $url = $c->get(Url::class);
@@ -59,7 +61,7 @@ return [
         $csrf = $c->get(Csrf::class);
 
         /** @var WebPage $webPage */
-        $webPage = new WebPageGeneric($c->get(ViewTopology::class), $assets['scripts'], $assets['styles']);
+        $webPage = new WebPageGeneric($c->get(ViewTopology::class),$c->get(AssetsCollection::class));
         $webPage->setAttribute('config', $c->get(Config::class))
                 ->setAttribute('url', $url)
                 ->setAttribute('projectName', $config->string('projectName'))
@@ -72,6 +74,14 @@ return [
                 ->setAttribute('route', $route->exportArray())
                 ->setAttribute('csrf', $csrf);
         return $webPage;
+    }),
+    AssetsCollection::class => factory(function (ContainerInterface $c) {
+        /** @var Config $config */
+        $config = $c->get(Config::class);
+        
+        $assets = $config->array('assets') ?? ['scripts' => [], 'styles' => []];
+        
+        return new AssetsCollectionGeneric($assets['scripts'], $assets['styles']);
     }),
     JsEnvHtml::class => factory(function (ContainerInterface $c) {
         /** @var Url $url */
