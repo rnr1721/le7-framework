@@ -27,7 +27,7 @@ All controllers must return PSR ResponseInterface
 
 namespace App\Controller\Web\Admin;
 
-use Core\Interfaces\RouteHttp;
+use Core\Interfaces\RouteHttpInterface;
 use App\Controller\ControllerWeb;
 
 class IndexController extends ControllerWeb
@@ -36,7 +36,7 @@ class IndexController extends ControllerWeb
     // You can inject any classes from container
     // to constructor or in action methods
     #[Params(allow:3)] // Three URL params after URL
-    public function indexAction(RouteHttp $route)
+    public function indexAction(RouteHttpInterface $route)
     {
         
         $param1 = $route->getParam(0) ?? 'default value 1';
@@ -58,7 +58,7 @@ class IndexController extends ControllerWeb
 
 namespace App\Controller\Web\Admin;
 
-use Core\Interfaces\RouteHttp;
+use Core\Interfaces\RouteHttpInterface;
 use App\Controller\ControllerWeb;
 
 class IndexController extends ControllerWeb
@@ -67,7 +67,7 @@ class IndexController extends ControllerWeb
     // You can inject any classes from container
     // to constructor or in action methods
     #[Params(allow:1)] // One URL params after URL
-    public function indexAction(RouteHttp $route)
+    public function indexAction(RouteHttpInterface $route)
     {
         
         // Get param from URL
@@ -90,7 +90,7 @@ class IndexController extends ControllerWeb
 
 namespace App\Controller\Web\Admin;
 
-use Core\Interfaces\RouteHttp;
+use Core\Interfaces\RouteHttpInterface;
 use App\Controller\ControllerWeb;
 
 class IndexController extends ControllerWeb
@@ -99,7 +99,7 @@ class IndexController extends ControllerWeb
     // You can inject any classes from container
     // to constructor or in action methods
     #[Params(allow:1)] // One URL params after URL
-    public function indexAction(RouteHttp $route)
+    public function indexAction(RouteHttpInterface $route)
     {
         
         // Get param from URL

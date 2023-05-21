@@ -1,25 +1,25 @@
 <?php
 
-use Twig\TwigFunction;
-use Twig\TwigFilter;
-use Core\Interfaces\View;
-use Core\Interfaces\Config;
-use Core\Interfaces\TwigConfig;
+use Core\Interfaces\ViewInterface;
+use Core\Interfaces\ConfigInterface;
+use Core\Interfaces\TwigConfigInterface;
 use Core\View\Twig\TwigConfigGeneric;
 use Core\View\Twig\TwigAdapter;
 use Psr\Container\ContainerInterface;
+use Twig\TwigFunction;
+use Twig\TwigFilter;
 use function DI\factory;
 
 return [
-    View::class => factory(function (ContainerInterface $c) {
+    ViewInterface::class => factory(function (ContainerInterface $c) {
         /** @var TwigAdapter $adapter */
         $adapter = $c->get(TwigAdapter::class);
         return $adapter->getView();
     }),
-    TwigConfig::class => factory(function (ContainerInterface $c) {
+    TwigConfigInterface::class => factory(function (ContainerInterface $c) {
         $twigConfig = new TwigConfigGeneric();
-        /** @var Config $config */
-        $config = $c->get(Config::class);
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
         if ($config->bool('isProduction')) {
             $twigConfig->setDebug(false)
                     ->setAutoReload(false);

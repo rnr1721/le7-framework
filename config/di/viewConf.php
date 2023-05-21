@@ -1,13 +1,13 @@
 <?php
 
-use Core\Interfaces\RouteHttp;
-use Core\Interfaces\CodeSnippets;
-use Core\Interfaces\Locales;
-use Core\Interfaces\ViewTopology;
-use Core\Interfaces\AssetsCollection;
-use Core\Interfaces\WebPage;
-use Core\Interfaces\Config;
-use Core\Interfaces\Url;
+use Core\Interfaces\RouteHttpInterface;
+use Core\Interfaces\CodeSnippetsInterface;
+use Core\Interfaces\LocalesInterface;
+use Core\Interfaces\ViewTopologyInterface;
+use Core\Interfaces\AssetsCollectionInterface;
+use Core\Interfaces\WebPageInterface;
+use Core\Interfaces\ConfigInterface;
+use Core\Interfaces\UrlInterface;
 use Core\View\WebPageGeneric;
 use Core\View\ViewTopologyGeneric;
 use Core\View\AssetsCollectionGeneric;
@@ -20,11 +20,11 @@ use Psr\SimpleCache\CacheInterface;
 use function DI\factory;
 
 return [
-    ViewTopology::class => factory(function (ContainerInterface $c) {
-        /** @var Config $config */
-        $config = $c->get(Config::class);
-        /** @var Url $url */
-        $url = $c->get(Url::class);
+    ViewTopologyInterface::class => factory(function (ContainerInterface $c) {
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
+        /** @var UrlInterface $url */
+        $url = $c->get(UrlInterface::class);
         $viewTopology = new ViewTopologyGeneric();
         $viewTopology->setBaseUrl($config->stringf('loc.public'))
                 ->setCssUrl($url->css())
@@ -37,32 +37,33 @@ return [
                 ->setTemplatePath($config->string('loc.templates_base'));
         return $viewTopology;
     }),
-    WebPage::class => factory(function (ContainerInterface $c) {
-        /** @var Locales $locales */
-        $locales = $c->get(Locales::class);
-        /** @var Config $config */
-        $config = $c->get(Config::class);
+    WebPageInterface::class => factory(function (ContainerInterface $c) {
+        /** @var LocalesInterface $locales */
+        $locales = $c->get(LocalesInterface::class);
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
 
-        
-
-        /** @var Url $url */
-        $url = $c->get(Url::class);
+        /** @var UrlInterface $url */
+        $url = $c->get(UrlInterface::class);
 
         /** @var JsEnvHtml $jsEnv */
         $jsEnv = $c->get(JsEnvHtml::class);
 
-        /** @var CodeSnippets $snippers */
-        $snippers = $c->get(CodeSnippets::class);
+        /** @var CodeSnippetsInterface $snippers */
+        $snippers = $c->get(CodeSnippetsInterface::class);
 
-        /** @var RouteHttp $route */
-        $route = $c->get(RouteHttp::class);
+        /** @var RouteHttpInterface $route */
+        $route = $c->get(RouteHttpInterface::class);
 
         /** @var Csrf $csrf */
         $csrf = $c->get(Csrf::class);
 
-        /** @var WebPage $webPage */
-        $webPage = new WebPageGeneric($c->get(ViewTopology::class),$c->get(AssetsCollection::class));
-        $webPage->setAttribute('config', $c->get(Config::class))
+        /** @var WebPageInterface $webPage */
+        $webPage = new WebPageGeneric(
+                $c->get(ViewTopologyInterface::class),
+                $c->get(AssetsCollectionInterface::class)
+                );
+        $webPage->setAttribute('config', $c->get(ConfigInterface::class))
                 ->setAttribute('url', $url)
                 ->setAttribute('projectName', $config->string('projectName'))
                 ->setAttribute('lang', $locales->getCurrentLocaleShortname())
@@ -75,26 +76,29 @@ return [
                 ->setAttribute('csrf', $csrf);
         return $webPage;
     }),
-    AssetsCollection::class => factory(function (ContainerInterface $c) {
-        /** @var Config $config */
-        $config = $c->get(Config::class);
-        
-        $assets = $config->array('assets') ?? ['scripts' => [], 'styles' => []];
-        
-        return new AssetsCollectionGeneric($assets['scripts'], $assets['styles']);
+    AssetsCollectionInterface::class => factory(function (ContainerInterface $c) {
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
+        $assets = $config->array('assets');
+        $collections = $config->array('collections');
+        return new AssetsCollectionGeneric(
+                $assets['scripts'],
+                $assets['styles'],
+                $collections
+                );
     }),
     JsEnvHtml::class => factory(function (ContainerInterface $c) {
-        /** @var Url $url */
-        $url = $c->get(Url::class);
+        /** @var UrlInterface $url */
+        $url = $c->get(UrlInterface::class);
         $jsEnvHtml = new JsEnvHtml();
         $jsEnv = new JsEnvDefault($jsEnvHtml);
         $jsEnv->addOwn('api_url', (string) $url . '/api/v1');
         return $jsEnv;
     }),
-    CodeSnippets::class => factory(function (ContainerInterface $c) {
+    CodeSnippetsInterface::class => factory(function (ContainerInterface $c) {
         $codeSnippets = new CodeSnippetsDefault($c->get(CacheInterface::class));
-        /** @var Config $config */
-        $config = $c->get(Config::class);
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
         $configPath = $config->string('loc.config');
         $top = $configPath . DS . 'snippets_top.txt';
         $middle = $configPath . DS . 'snippets_middle.txt';

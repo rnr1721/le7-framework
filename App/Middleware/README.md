@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
-use Core\Interfaces\RouteHttp;
+use Core\Interfaces\RouteHttpInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -22,10 +22,10 @@ use Psr\Http\Message\ServerRequestInterface;
 class Example implements MiddlewareInterface
 {
 
-    public RouteHttp $route;
+    public RouteHttpInterface $route;
 
 
-    public function __construct(RouteHttp $route)
+    public function __construct(RouteHttpInterface $route)
     {
         $this->route = $route;
     }

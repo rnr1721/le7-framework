@@ -112,7 +112,7 @@ And change it to create own logger (for example monolog)
 You can change cookie and session cookie settings in file sysyemConf.php
 
 ```php
-    Session::class => factory(function (ContainerInterface $c) {
+    SessionInterface::class => factory(function (ContainerInterface $c) {
         /** @var Config $config */
         $config = $c->get(Config::class);
         $storePath = $config->stringf('loc.var') . DS . 'sessions';
@@ -127,7 +127,7 @@ You can change cookie and session cookie settings in file sysyemConf.php
         $session->applyParams($sessionParams);
         return $session;
     }),
-    Cookie::class => factory(function () {
+    CookieInterface::class => factory(function () {
         $cookiesConfig = new CookieConfigDefault([
             'domain' => '',
             'httpOnly' => true,
@@ -149,12 +149,12 @@ In file systemConf you can change place where stored flash messages
 In this case flash messages stored in session:
 
 ```php
-    MessageCollection::class => factory(function (ContainerInterface $c) {
-        $factory = $c->get(MessageFactory::class);
+    MessageCollectionInterface::class => factory(function (ContainerInterface $c) {
+        $factory = $c->get(MessageFactoryInterface::class);
         return $factory->getMessagesSession();
     }),
-    MessageCollectionFlash::class => factory(function (ContainerInterface $c) {
-        $factory = $c->get(MessageFactory::class);
+    MessageCollectionFlashInterface::class => factory(function (ContainerInterface $c) {
+        $factory = $c->get(MessageFactoryInterface::class);
         return $factory->getMessagesSession();
     }),
 ```
@@ -162,13 +162,13 @@ In this case flash messages stored in session:
 And in this case messages stored in cookies:
 
 ```php
-    MessageCollection::class => factory(function (ContainerInterface $c) {
+    MessageCollectionInterface::class => factory(function (ContainerInterface $c) {
         /** @var MessageFactory $factory */
-        $factory = $c->get(MessageFactory::class);
+        $factory = $c->get(MessageFactoryInterface::class);
         return $factory->getMessagesCookie();
     }),
-    MessageCollectionFlash::class => factory(function (ContainerInterface $c) {
-        $factory = $c->get(MessageFactory::class);
+    MessageCollectionFlashInterface::class => factory(function (ContainerInterface $c) {
+        $factory = $c->get(MessageFactoryInterface::class);
         return $factory->getMessagesCookie();
     }),
 ```

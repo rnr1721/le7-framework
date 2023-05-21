@@ -2,14 +2,14 @@
 
 namespace App\Controller\Web;
 
-use Core\Interfaces\Config;
+use Core\Interfaces\ConfigInterface;
 use App\Controller\ControllerWeb;
 use Psr\Http\Message\ResponseInterface;
 
 class PhpinfoController extends ControllerWeb
 {
 
-    public function indexAction(Config $config): ResponseInterface
+    public function indexAction(ConfigInterface $config): ResponseInterface
     {
         // Allow only in non-production mode
         if ($config->bool('isProduction')) {

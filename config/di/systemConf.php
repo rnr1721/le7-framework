@@ -1,24 +1,24 @@
 <?php
 
-use Core\Interfaces\ErrorHandlerFactory;
-use Core\Interfaces\Request;
-use Core\Interfaces\Response;
-use Core\Interfaces\ResponseEmitter;
-use Core\Interfaces\RouteHttp;
-use Core\Interfaces\RouteCli;
-use Core\Interfaces\Locales;
-use Core\Interfaces\MessageFactory;
-use Core\Interfaces\MessageCollection;
-use Core\Interfaces\MessageCollectionFlash;
-use Core\Interfaces\MiddlewareFactory;
-use Core\Interfaces\Config;
-use Core\Interfaces\Session;
-use Core\Interfaces\Cookie;
-use Core\Interfaces\Url;
+use Core\Interfaces\ErrorHandlerFactoryInterface;
+use Core\Interfaces\RequestInterface;
+use Core\Interfaces\HttpOutputInterface;
+use Core\Interfaces\ResponseEmitterInterface;
+use Core\Interfaces\RouteHttpInterface;
+use Core\Interfaces\RouteCliInterface;
+use Core\Interfaces\LocalesInterface;
+use Core\Interfaces\MessageFactoryInterface;
+use Core\Interfaces\MessageCollectionInterface;
+use Core\Interfaces\MessageCollectionFlashInterface;
+use Core\Interfaces\MiddlewareFactoryInterface;
+use Core\Interfaces\ConfigInterface;
+use Core\Interfaces\SessionInterface;
+use Core\Interfaces\CookieInterface;
+use Core\Interfaces\UrlInterface;
 use Core\ErrorHandler\ErrorHandlerCli;
 use Core\ErrorHandler\ErrorHandlerHttp;
-use Core\RequestDefault;
-use Core\ResponseDefault;
+use Core\Request;
+use Core\HttpOutput;
 use Core\Bag\RouteBag;
 use Core\Factories\ErrorHandlerFactoryDefault;
 use Core\Locales\LocalesDefault;
@@ -37,24 +37,24 @@ use function DI\get;
 use function DI\autowire;
 
 return [
-    Config::class => factory(function (ContainerInterface $c) {
+    ConfigInterface::class => factory(function (ContainerInterface $c) {
         $cache = $c->get(CacheInterface::class);
         $factory = new ConfigFactoryGeneric($cache);
         return $factory->harvest(BASE_PATH . DS . 'config');
     }),
-    MiddlewareFactory::class => autowire(MiddlewareFactoryDefault::class),
-    MessageFactory::class => get(MessageFactoryGeneric::class),
-    MessageCollection::class => factory(function (ContainerInterface $c) {
-        $factory = $c->get(MessageFactory::class);
+    MiddlewareFactoryInterface::class => autowire(MiddlewareFactoryDefault::class),
+    MessageFactoryInterface::class => get(MessageFactoryGeneric::class),
+    MessageCollectionInterface::class => factory(function (ContainerInterface $c) {
+        $factory = $c->get(MessageFactoryInterface::class);
         return $factory->getMessagesSession();
     }),
-    MessageCollectionFlash::class => factory(function (ContainerInterface $c) {
-        $factory = $c->get(MessageFactory::class);
+    MessageCollectionFlashInterface::class => factory(function (ContainerInterface $c) {
+        $factory = $c->get(MessageFactoryInterface::class);
         return $factory->getMessagesSession();
     }),
-    Session::class => factory(function (ContainerInterface $c) {
-        /** @var Config $config */
-        $config = $c->get(Config::class);
+    SessionInterface::class => factory(function (ContainerInterface $c) {
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
         $storePath = $config->stringf('loc.var') . DS . 'sessions';
         $session = new SessionNative(false, null, null, $storePath);
         $sessionParams = [
@@ -67,7 +67,7 @@ return [
         $session->applyParams($sessionParams);
         return $session;
     }),
-    Cookie::class => factory(function () {
+    CookieInterface::class => factory(function () {
         $cookiesConfig = new CookieConfigDefault([
             'domain' => '',
             'httpOnly' => true,
@@ -78,30 +78,30 @@ return [
         ]);
         return new CookiesNative($cookiesConfig);
     }),
-    Locales::class => get(LocalesDefault::class),
-    Url::class => get(UrlBuilder::class),
-    RouteHttp::class => factory(function (ContainerInterface $c) {
+    LocalesInterface::class => get(LocalesDefault::class),
+    UrlInterface::class => get(UrlBuilder::class),
+    RouteHttpInterface::class => factory(function (ContainerInterface $c) {
         /** @var RouteBag $bag */
         $bag = $c->get(RouteBag::class);
         return $bag->getRoute();
     }),
-    RouteCli::class => factory(function (ContainerInterface $c) {
+    RouteCliInterface::class => factory(function (ContainerInterface $c) {
         /** @var RouteBag $bag */
         $bag = $c->get(RouteBag::class);
         return $bag->getRoute();
     }),
-    ResponseEmitter::class => get(ResponseEmitterGeneric::class),
-    ErrorHandlerFactory::class => get(ErrorHandlerFactoryDefault::class),
+    ResponseEmitterInterface::class => get(ResponseEmitterGeneric::class),
+    ErrorHandlerFactoryInterface::class => get(ErrorHandlerFactoryDefault::class),
     ErrorHandlerCli::class => factory(function (ContainerInterface $c) {
-        /** @var ErrorHandlerFactory $factory */
-        $factory = $c->get(ErrorHandlerFactory::class);
+        /** @var ErrorHandlerFactoryInterface $factory */
+        $factory = $c->get(ErrorHandlerFactoryInterface::class);
         return $factory->getErrorHandlerCli();
     }),
     ErrorHandlerHttp::class => factory(function (ContainerInterface $c) {
-        /** @var ErrorHandlerFactory $factory */
-        $factory = $c->get(ErrorHandlerFactory::class);
-        return $factory->getErrorHandlerHttp($c->get(RouteHttp::class));
+        /** @var ErrorHandlerFactoryInterface $factory */
+        $factory = $c->get(ErrorHandlerFactoryInterface::class);
+        return $factory->getErrorHandlerHttp($c->get(RouteHttpInterface::class));
     }),
-    Response::class => get(ResponseDefault::class),
-    Request::class => get(RequestDefault::class)
+    HttpOutputInterface::class => get(HttpOutput::class),
+    RequestInterface::class => get(Request::class)
 ];

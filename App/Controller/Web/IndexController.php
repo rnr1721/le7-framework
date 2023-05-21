@@ -2,7 +2,7 @@
 
 namespace App\Controller\Web;
 
-use Core\Interfaces\MessageCollectionFlash;
+use Core\Interfaces\MessageCollectionFlashInterface;
 use Core\Entify\Interfaces\EntificationInterface;
 use Psr\Http\Message\ResponseInterface;
 use App\Controller\ControllerWeb;
@@ -10,8 +10,9 @@ use App\Controller\ControllerWeb;
 class IndexController extends ControllerWeb
 {
 
-    public function indexAction(): ResponseInterface
+    public function indexAction(\Core\Interfaces\UrlInterface $url): ResponseInterface
     {
+
         // Setup assets to webbpage
         $this->webPage->setScriptFromLib('bootstrap5', false)
                 ->setStyleFromLib('fontawesome6,bootstrap5');
@@ -24,7 +25,10 @@ class IndexController extends ControllerWeb
     }
 
     // Action with processing form (POST)
-    public function indexPostAction(EntificationInterface $entify, MessageCollectionFlash $messages)
+    public function indexPostAction(
+            EntificationInterface $entify,
+            MessageCollectionFlashInterface $messages
+    )
     {
 
         // Get form provider with rules

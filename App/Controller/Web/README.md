@@ -13,17 +13,17 @@ For example, DI in constructor:
 
 namespace App\Controller\Web;
 
-use Core\Interfaces\WebPage;
-use Core\Interfaces\View;
+use Core\Interfaces\WebPageInterface;
+use Core\Interfaces\ViewInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class IndexController
 {
 
-    public WebPage $webPage;
-    public View $view;
+    public WebPageInterface $webPage;
+    public ViewInterface $view;
 
-    public function __construct(View $view, WebPage $webPage)
+    public function __construct(ViewInterface $view, WebPageInterface $webPage)
     {
         $this->webPage = $webPage;
         $this->view = $view;
@@ -51,14 +51,14 @@ DI in method
 
 namespace App\Controller\Web;
 
-use Core\Interfaces\WebPage;
-use Core\Interfaces\View;
+use Core\Interfaces\WebPageInterface;
+use Core\Interfaces\ViewInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class IndexController
 {
 
-    public function indexAction(View $view, WebPage $webPage): ResponseInterface
+    public function indexAction(ViewInterface $view, WebPageInterface $webPage): ResponseInterface
     {
         $webPage->setPageTitle('Start Page');
         $view->assign('content','mainpage.twig');
@@ -75,13 +75,13 @@ Another example - DI in method
 
 namespace App\Controller\Web;
 
-use Core\Interfaces\Response;
+use Core\Interfaces\HttpOutputInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class IndexController
 {
 
-    public function indexAction(Response $response): ResponseInterface
+    public function indexAction(HttpOutputInterface $response): ResponseInterface
     {
 
         $data = [
@@ -103,14 +103,14 @@ I you are using PHP-DI, you can use PHP-DI to inject in property:
 namespace App\Controller\Web;
 
 use DI\Attribute\Inject;
-use Core\Interfaces\Response;
+use Core\Interfaces\HttpOutputInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class IndexController
 {
 
     #[Inject]
-    public Response $response;
+    public HttpOutputInterface $response;
 
     public function indexAction(): ResponseInterface
     {
@@ -139,14 +139,14 @@ namespace App\Controller\Web;
 
 use DI\Attribute\Inject;
 use Core\Attributes\Params;
-use Core\Interfaces\Response;
+use Core\Interfaces\HttpOutputInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class IndexController
 {
 
     #[Inject]
-    public Response $response;
+    public HttpOutputInterface $response;
 
     // For this route csrf protection turned off
     #[Params(csrf:false)]
@@ -177,8 +177,8 @@ For example you want to get parametres from url:
 namespace App\Controller\Web;
 
 use DI\Attribute\Inject;
-use Core\Interfaces\Response;
-use Core\Interfaces\RouteHttp;
+use Core\Interfaces\HttpOutputInterface;
+use Core\Interfaces\RouteHttpInterface;
 use Core\Attributes\Params;
 use Psr\Http\Message\ResponseInterface;
 
@@ -186,11 +186,11 @@ class ParamsController
 {
 
     #[Inject]
-    public Response $response;
+    public HttpOutputInterface $response;
 
     // Now you can use URL parametres
     #[Params(allow:3)]
-    public function indexAction(RouteHttp $route): ResponseInterface
+    public function indexAction(RouteHttpInterface $route): ResponseInterface
     {
 
         // For example our route is https://example.com/params/one/two/three

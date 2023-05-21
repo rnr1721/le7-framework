@@ -1,13 +1,13 @@
 <?php
 
-use Nyholm\Psr7\Factory\Psr17Factory;
-use Core\Interfaces\Config;
-use Core\Interfaces\ListenerProvider;
+use Core\Interfaces\ConfigInterface;
+use Core\Interfaces\ListenerProviderInterface;
 use Core\Bag\RequestBag;
 use Core\Cache\SCFactoryGeneric;
 use Core\Logger\LoggerFactoryGeneric;
 use Core\EventDispatcher\Providers\ListenerProviderDefault;
 use Core\EventDispatcher\EventDispatcher;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\SimpleCache\CacheInterface;
 use Psr\Log\LoggerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -31,9 +31,9 @@ return [
         return $factory->createResponse(404);
     }),
     EventDispatcherInterface::class => get(EventDispatcher::class),
-    ListenerProvider::class => factory(function (ContainerInterface $c) {
-        /** @var Config $config */
-        $config = $c->get(Config::class);
+    ListenerProviderInterface::class => factory(function (ContainerInterface $c) {
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
         $events = $config->array('events') ?? [];
         $listeners = new ListenerProviderDefault();
         foreach ($events as $key => $eventValue) {
@@ -43,7 +43,7 @@ return [
     }),
     LoggerInterface::class => factory(function (ContainerInterface $c) {
         $factory = new LoggerFactoryGeneric();
-        $config = $c->get(Config::class);
+        $config = $c->get(ConfigInterface::class);
         $logFile = $config->stringf('loc.var') . DS . 'logs' . DS . 'system.log';
         return $factory->logFile($logFile);
     }),

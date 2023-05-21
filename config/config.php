@@ -24,5 +24,6 @@ return [
     "theme" => "main",
     // Error Reporting
     "errorReporting" => true,
+    // Extensions dir for current template engine
     "viewExtensions" => "{base}{ds}App{ds}ViewExtensions"
 ];

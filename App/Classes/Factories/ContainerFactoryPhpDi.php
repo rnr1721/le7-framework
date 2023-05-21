@@ -2,11 +2,11 @@
 
 namespace App\Classes\Factories;
 
-use Core\Interfaces\ContainerFactory;
+use Core\Interfaces\ContainerFactoryInterface;
 use Psr\Container\ContainerInterface;
 use DI\ContainerBuilder;
 
-class ContainerFactoryPhpDi implements ContainerFactory
+class ContainerFactoryPhpDi implements ContainerFactoryInterface
 {
 
     private string $diCompiledFolder;
@@ -41,9 +41,10 @@ class ContainerFactoryPhpDi implements ContainerFactory
     public function getDefinitions(): array
     {
         $definitions = [];
-        foreach (glob($this->configFolder . DIRECTORY_SEPARATOR . "*Conf.php") as $filename) {
+        $files = glob($this->configFolder . DIRECTORY_SEPARATOR . "*Conf.php");
+        foreach ($files as $filename) {
             if ($filename !== '.' && $filename !== '..') {
-                $array = require($filename);
+                $array = require $filename;
                 if (is_array($array)) {
                     $definitions = array_merge($definitions, $array);
                 }

@@ -2,51 +2,57 @@
 
 namespace App\Controller;
 
-use Core\Interfaces\Request;
-use Core\Interfaces\Response;
-use Core\Interfaces\RouteHttp;
-use Core\Interfaces\View;
-use Core\Interfaces\WebPage;
+use Core\Interfaces\RequestInterface;
+use Core\Interfaces\HttpOutputInterface;
+use Core\Interfaces\RouteHttpInterface;
+use Core\Interfaces\ViewInterface;
+use Core\Interfaces\WebPageInterface;
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Parent class for all Web controllers
+ * You can make own class end extend from this class
+ * to make base controller or something special
+ * And of course you can not extend from any base controllers
+ */
 class ControllerWeb
 {
 
     /**
      * Current route
-     * @var RouteHttp
+     * @var RouteHttpInterface
      */
     #[Inject]
-    public RouteHttp $route;
+    public RouteHttpInterface $route;
 
     /**
      * System (NOT PSR) Request object
-     * @var Request
+     * @var RequestInterface
      */
     #[Inject]
-    public Request $request;
+    public RequestInterface $request;
 
     /**
-     * System (NOT PSR) Response object
-     * @var Response
+     * System Response object
+     * @var HttpOutputInterface
      */
     #[Inject]
-    public Response $response;
+    public HttpOutputInterface $response;
 
     /**
      * View object
-     * @var View
+     * @var ViewInterface
      */
     #[Inject]
-    public View $view;
+    public ViewInterface $view;
 
     /**
      * WebPage object
-     * @var WebPage
+     * @var WebPageInterface
      */
     #[Inject]
-    public WebPage $webPage;
+    public WebPageInterface $webPage;
 
     /**
      * Set page header for H1
