@@ -29,7 +29,8 @@ return [
         'api' => [
             ApiHeadersMiddleware::class,
             ApiOptionsMiddleware::class,
-            ControllerRunMiddleware::class
+            ControllerRunMiddleware::class,
+            ContentLengthMiddleware::class
         ]
     ]
 ];

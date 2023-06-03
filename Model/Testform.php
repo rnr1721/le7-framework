@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace Model;
 
 use Core\Database\Redbean\Model;
 use Core\Entify\Interfaces\ModelInterface;

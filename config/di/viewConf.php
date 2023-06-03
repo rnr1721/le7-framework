@@ -1,5 +1,6 @@
 <?php
 
+use Core\Interfaces\JsEnvironmentInterface;
 use Core\Interfaces\RouteHttpInterface;
 use Core\Interfaces\CodeSnippetsInterface;
 use Core\Interfaces\LocalesInterface;
@@ -26,7 +27,7 @@ return [
         /** @var UrlInterface $url */
         $url = $c->get(UrlInterface::class);
         $viewTopology = new ViewTopologyGeneric();
-        $viewTopology->setBaseUrl($config->stringf('loc.public'))
+        $viewTopology->setBaseUrl($url->get())
                 ->setCssUrl($url->css())
                 ->setFontsUrl($url->fonts())
                 ->setImagesUrl($url->images())
@@ -46,8 +47,8 @@ return [
         /** @var UrlInterface $url */
         $url = $c->get(UrlInterface::class);
 
-        /** @var JsEnvHtml $jsEnv */
-        $jsEnv = $c->get(JsEnvHtml::class);
+        /** @var JsEnvironmentInterface $jsEnv */
+        $jsEnv = $c->get(JsEnvironmentInterface::class);
 
         /** @var CodeSnippetsInterface $snippers */
         $snippers = $c->get(CodeSnippetsInterface::class);
@@ -62,7 +63,7 @@ return [
         $webPage = new WebPageGeneric(
                 $c->get(ViewTopologyInterface::class),
                 $c->get(AssetsCollectionInterface::class)
-                );
+        );
         $webPage->setAttribute('config', $c->get(ConfigInterface::class))
                 ->setAttribute('url', $url)
                 ->setAttribute('projectName', $config->string('projectName'))
@@ -82,17 +83,24 @@ return [
         $assets = $config->array('assets');
         $collections = $config->array('collections');
         return new AssetsCollectionGeneric(
-                $assets['scripts'],
-                $assets['styles'],
-                $collections
-                );
+        $assets['scripts'],
+        $assets['styles'],
+        $collections
+        );
     }),
-    JsEnvHtml::class => factory(function (ContainerInterface $c) {
+    JsEnvironmentInterface::class => factory(function (ContainerInterface $c) {
+        /** @var LocalesInterface $locales */
+        $locales = $c->get(LocalesInterface::class);
         /** @var UrlInterface $url */
         $url = $c->get(UrlInterface::class);
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
         $jsEnvHtml = new JsEnvHtml();
         $jsEnv = new JsEnvDefault($jsEnvHtml);
-        $jsEnv->addOwn('api_url', (string) $url . '/api/v1');
+        $jsEnv->addOwn('root', (string) $url);
+        $jsEnv->addOwn('language', $locales->getCurrentLocaleShortname());
+        $jsEnv->addOwn('locales', $locales->getLocalesByName(),false);
+        $jsEnv->addMultiple($config->array('jsEnvironment') ?? []);
         return $jsEnv;
     }),
     CodeSnippetsInterface::class => factory(function (ContainerInterface $c) {

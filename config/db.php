@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'modelNamespace' => '\\App\Model\\',
+    'modelNamespace' => '\\Model\\',
     'defaultDbDriver' => 'sqlite', // sqlite or sql
     'db' => [
         'dev' => [

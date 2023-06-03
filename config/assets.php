@@ -24,5 +24,6 @@ return [
                 'bootstrap5', 'fontawesome6'
             ]
         ]
-    ]
+    ],
+    'jsEnvironment' => []
 ];

@@ -1,11 +1,13 @@
 <?php
 
+use Core\Interfaces\BundleManagerInterface;
 use Core\Interfaces\ErrorHandlerFactoryInterface;
 use Core\Interfaces\RequestInterface;
 use Core\Interfaces\HttpOutputInterface;
 use Core\Interfaces\ResponseEmitterInterface;
 use Core\Interfaces\RouteHttpInterface;
 use Core\Interfaces\RouteCliInterface;
+use Core\Interfaces\RouteRepositoryInterface;
 use Core\Interfaces\LocalesInterface;
 use Core\Interfaces\MessageFactoryInterface;
 use Core\Interfaces\MessageCollectionInterface;
@@ -20,13 +22,15 @@ use Core\ErrorHandler\ErrorHandlerHttp;
 use Core\Request;
 use Core\HttpOutput;
 use Core\Bag\RouteBag;
+use Core\Bundles\BundleManager;
+use Core\Routing\RouteRepository;
 use Core\Factories\ErrorHandlerFactoryDefault;
 use Core\Locales\LocalesDefault;
 use Core\Session\SessionNative;
 use Core\Cookies\CookiesNative;
 use Core\Cookies\CookieConfigDefault;
 use Core\Messages\MessageFactoryGeneric;
-use Core\Routing\UrlBuilder;
+use Core\Links\UrlBuilder;
 use Core\Response\ResponseEmitterGeneric;
 use Core\Factories\MiddlewareFactoryDefault;
 use Core\Config\ConfigFactoryGeneric;
@@ -57,25 +61,14 @@ return [
         $config = $c->get(ConfigInterface::class);
         $storePath = $config->stringf('loc.var') . DS . 'sessions';
         $session = new SessionNative(false, null, null, $storePath);
-        $sessionParams = [
-            'lifetime' => 86400,
-            'path' => '/',
-            'secure' => false,
-            'httponly' => true,
-            'samesite' => 'Lax'
-        ];
+        $sessionParams = $config->array('state.session');
         $session->applyParams($sessionParams);
         return $session;
     }),
-    CookieInterface::class => factory(function () {
-        $cookiesConfig = new CookieConfigDefault([
-            'domain' => '',
-            'httpOnly' => true,
-            'path' => '/',
-            'isSecure' => false,
-            'time' => 3600,
-            'sameSite' => 'Lax'
-        ]);
+    CookieInterface::class => factory(function (ContainerInterface $c) {
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
+        $cookiesConfig = new CookieConfigDefault($config->array('state.cookies'));
         return new CookiesNative($cookiesConfig);
     }),
     LocalesInterface::class => get(LocalesDefault::class),
@@ -103,5 +96,7 @@ return [
         return $factory->getErrorHandlerHttp($c->get(RouteHttpInterface::class));
     }),
     HttpOutputInterface::class => get(HttpOutput::class),
-    RequestInterface::class => get(Request::class)
+    RequestInterface::class => get(Request::class),
+    RouteRepositoryInterface::class => get(RouteRepository::class),
+    BundleManagerInterface::class =>get(BundleManager::class)
 ];

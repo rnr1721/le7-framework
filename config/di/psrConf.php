@@ -1,5 +1,6 @@
 <?php
 
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Core\Interfaces\ConfigInterface;
 use Core\Interfaces\ListenerProviderInterface;
 use Core\Bag\RequestBag;
@@ -7,10 +8,12 @@ use Core\Cache\SCFactoryGeneric;
 use Core\Logger\LoggerFactoryGeneric;
 use Core\EventDispatcher\Providers\ListenerProviderDefault;
 use Core\EventDispatcher\EventDispatcher;
-use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\SimpleCache\CacheInterface;
 use Psr\Log\LoggerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -52,5 +55,8 @@ return [
         $factory = new SCFactoryGeneric();
         $cachePath = BASE_PATH . DS . 'var' . DS . 'cache';
         return $factory->getFileCache($cachePath);
-    })
+    }),
+    UriFactoryInterface::class => get(Psr17Factory::class),
+    RequestFactoryInterface::class => get(Psr17Factory::class),
+    StreamFactoryInterface::class => get(Psr17Factory::class)
 ];

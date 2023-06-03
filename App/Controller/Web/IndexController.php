@@ -10,12 +10,12 @@ use App\Controller\ControllerWeb;
 class IndexController extends ControllerWeb
 {
 
-    public function indexAction(\Core\Interfaces\UrlInterface $url): ResponseInterface
-    {
-
+    public function indexAction(): ResponseInterface
+    {   
+        
         // Setup assets to webbpage
         $this->webPage->setScriptFromLib('bootstrap5', false)
-                ->setStyleFromLib('fontawesome6,bootstrap5');
+                ->setStyleFromLib('bootstrap5,fontawesome6');
         // Set page title
         $this->webPage->setPageTitle('Page title');
         //Set content template

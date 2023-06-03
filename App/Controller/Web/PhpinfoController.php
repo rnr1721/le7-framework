@@ -19,7 +19,6 @@ class PhpinfoController extends ControllerWeb
         ob_start();
         phpinfo();
         $result = ob_get_clean();
-        ob_flush();
         // Return ResponseInterface
         return $this->response->toHtml()->emit($result);
     }

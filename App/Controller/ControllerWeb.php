@@ -132,13 +132,13 @@ class ControllerWeb
      * @param string $params Different params
      * @return self
      */
-    public function setScriptLib(
+    public function setScriptGlobal(
             string $scriptName,
             bool $header = true,
             string $params = ''
     ): self
     {
-        $this->webPage->setScriptLib($scriptName, $header, $params);
+        $this->webPage->setScriptFromGlobal($scriptName, $header, $params);
         return $this;
     }
 
@@ -177,9 +177,9 @@ class ControllerWeb
      * @param string $styleName Filename
      * @return self
      */
-    public function setStyleLibs(string $styleName): self
+    public function setStyleGlobal(string $styleName): self
     {
-        $this->webPage->setStyleLib($styleName);
+        $this->webPage->setStyleFromGlobal($styleName);
         return $this;
     }
 
