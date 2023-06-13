@@ -1,5 +1,7 @@
 <?php
 
+use Core\Interfaces\MenuRendererInterface;
+use Core\Interfaces\MenuBuilderInterface;
 use Core\Interfaces\JsEnvironmentInterface;
 use Core\Interfaces\RouteHttpInterface;
 use Core\Interfaces\CodeSnippetsInterface;
@@ -10,8 +12,9 @@ use Core\Interfaces\WebPageInterface;
 use Core\Interfaces\ConfigInterface;
 use Core\Interfaces\UrlInterface;
 use Core\View\WebPageGeneric;
-use Core\View\ViewTopologyGeneric;
 use Core\View\AssetsCollectionGeneric;
+use Core\MenuManager\MenuBuilder;
+use Core\MenuManager\Renderer\BootstrapMenuRenderer;
 use Core\CodeParts\CodeSnippetsDefault;
 use Core\JsEnv\Adapters\JsEnvHtml;
 use Core\JsEnv\JsEnvDefault;
@@ -21,23 +24,6 @@ use Psr\SimpleCache\CacheInterface;
 use function DI\factory;
 
 return [
-    ViewTopologyInterface::class => factory(function (ContainerInterface $c) {
-        /** @var ConfigInterface $config */
-        $config = $c->get(ConfigInterface::class);
-        /** @var UrlInterface $url */
-        $url = $c->get(UrlInterface::class);
-        $viewTopology = new ViewTopologyGeneric();
-        $viewTopology->setBaseUrl($url->get())
-                ->setCssUrl($url->css())
-                ->setFontsUrl($url->fonts())
-                ->setImagesUrl($url->images())
-                ->setJsUrl($url->js())
-                ->setLibsUrl($url->libs())
-                ->setThemeUrl($url->theme())
-                ->setTemplatePath($config->stringf('loc.templates'))
-                ->setTemplatePath($config->string('loc.templates_base'));
-        return $viewTopology;
-    }),
     WebPageInterface::class => factory(function (ContainerInterface $c) {
         /** @var LocalesInterface $locales */
         $locales = $c->get(LocalesInterface::class);
@@ -99,7 +85,7 @@ return [
         $jsEnv = new JsEnvDefault($jsEnvHtml);
         $jsEnv->addOwn('root', (string) $url);
         $jsEnv->addOwn('language', $locales->getCurrentLocaleShortname());
-        $jsEnv->addOwn('locales', $locales->getLocalesByName(),false);
+        $jsEnv->addOwn('locales', $locales->getLocalesByName(), false);
         $jsEnv->addMultiple($config->array('jsEnvironment') ?? []);
         return $jsEnv;
     }),
@@ -116,5 +102,15 @@ return [
         $codeSnippets->register('snippets_middle', $middle, $isProduction);
         $codeSnippets->register('snippets_bottom', $bottom, $isProduction);
         return $codeSnippets;
+    }),
+    MenuBuilderInterface::class => factory(function (ContainerInterface $c) {
+        /** @var UrlInterface $url */
+        $url = $c->get(UrlInterface::class);
+        $menuBuilder = new MenuBuilder($c->get(MenuRendererInterface::class));
+        $menuBuilder->setUrlReplaceVars('url', $url->get());
+        return $menuBuilder;
+    }),
+    MenuRendererInterface::class => factory(function () {
+        return new BootstrapMenuRenderer();
     })
 ];

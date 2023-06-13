@@ -1,49 +1,25 @@
 <?php
 
 use Nyholm\Psr7\Factory\Psr17Factory;
+use Core\Interfaces\SessionInterface;
+use Core\Interfaces\CookieInterface;
 use Core\Interfaces\ConfigInterface;
-use Core\Interfaces\ListenerProviderInterface;
-use Core\Bag\RequestBag;
 use Core\Cache\SCFactoryGeneric;
+use Core\Session\SessionNative;
+use Core\Cookies\CookiesNative;
 use Core\Logger\LoggerFactoryGeneric;
-use Core\EventDispatcher\Providers\ListenerProviderDefault;
-use Core\EventDispatcher\EventDispatcher;
+use Core\Cookies\CookieConfigDefault;
 use Psr\SimpleCache\CacheInterface;
 use Psr\Log\LoggerInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Container\ContainerInterface;
 use function DI\factory;
 use function DI\get;
 
 return [
-    ServerRequestInterface::class => factory(function (ContainerInterface $c) {
-        /** @var RequestBag $requestBag */
-        $requestBag = $c->get(RequestBag::class);
-        return $requestBag->getServerRequest();
-    }),
-    ResponseFactoryInterface::class => get(Psr17Factory::class),
-    ResponseInterface::class => factory(function (ContainerInterface $c) {
-        /** @var ResponseFactoryInterface $factory */
-        $factory = $c->get(ResponseFactoryInterface::class);
-        return $factory->createResponse(404);
-    }),
-    EventDispatcherInterface::class => get(EventDispatcher::class),
-    ListenerProviderInterface::class => factory(function (ContainerInterface $c) {
-        /** @var ConfigInterface $config */
-        $config = $c->get(ConfigInterface::class);
-        $events = $config->array('events') ?? [];
-        $listeners = new ListenerProviderDefault();
-        foreach ($events as $key => $eventValue) {
-            $listeners->on($eventValue[0], $eventValue[1], $key);
-        }
-        return $listeners;
-    }),
     LoggerInterface::class => factory(function (ContainerInterface $c) {
         $factory = new LoggerFactoryGeneric();
         $config = $c->get(ConfigInterface::class);
@@ -56,6 +32,22 @@ return [
         $cachePath = BASE_PATH . DS . 'var' . DS . 'cache';
         return $factory->getFileCache($cachePath);
     }),
+    SessionInterface::class => factory(function (ContainerInterface $c) {
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
+        $storePath = $config->stringf('loc.var') . DS . 'sessions';
+        $session = new SessionNative(false, null, null, $storePath);
+        $sessionParams = $config->array('state.session');
+        $session->applyParams($sessionParams);
+        return $session;
+    }),
+    CookieInterface::class => factory(function (ContainerInterface $c) {
+        /** @var ConfigInterface $config */
+        $config = $c->get(ConfigInterface::class);
+        $cookiesConfig = new CookieConfigDefault($config->array('state.cookies'));
+        return new CookiesNative($cookiesConfig);
+    }),
+    ResponseFactoryInterface::class => get(Psr17Factory::class),
     UriFactoryInterface::class => get(Psr17Factory::class),
     RequestFactoryInterface::class => get(Psr17Factory::class),
     StreamFactoryInterface::class => get(Psr17Factory::class)

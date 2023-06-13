@@ -6,7 +6,7 @@ use Nyholm\Psr7Server\ServerRequestCreator;
 use Core\Topology;
 use Core\InitHttp;
 use Core\InitCli;
-use App\Classes\Factories\ContainerFactoryPhpDi;
+use Core\Factories\ContainerFactoryPhpDi;
 
 if (!defined('PUBLIC_PATH')) {
     // Prevent to launch not from public folder

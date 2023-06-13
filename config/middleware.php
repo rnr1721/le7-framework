@@ -1,5 +1,6 @@
 <?php
 
+use App\Middleware\WebMenuMiddleware;
 use Core\Middleware\WebPutMessagesMiddleware;
 use Core\Middleware\ContentLengthMiddleware;
 use Core\Middleware\ControllerRunMiddleware;
@@ -22,6 +23,7 @@ return [
             WebSessionStartMiddleware::class,
             WebHandleMessagesMiddleware::class,
             WebCsrfMiddleware::class,
+            WebMenuMiddleware::class,
             ControllerRunMiddleware::class,
             WebPutMessagesMiddleware::class,
             ContentLengthMiddleware::class

@@ -6,7 +6,7 @@
         {
             "name": "Eugeny G",
             "email": "rnr1721@gmail.com",
-            "homepage": "https://xhamster.biz.ua",
+            "homepage": "https://github.com/rnr1721",
             "role": "Developer"
         }
     ],
@@ -19,21 +19,20 @@
         "lame",
         "framework"
     ],
-    "homepage": "https://xhamster.biz.ua",
+    "homepage": "https://github.com/rnr1721/le7-framework",
     "require": {
         "php": ">=8.1",
         "ext-gettext": "*",
-        "rnr1721/le7-core": "*",
+        "rnr1721/le7-container-php-di": "*",
         "rnr1721/le7-cache": "^1.0",
         "rnr1721/le7-logger": "^1.0",
         "rnr1721/le7-jsenv": "^1.0",
         "rnr1721/le7-static-snippets": "^1.0",
-        "rnr1721/le7-api-request": "^1.0",
-        "rnr1721/le7-http-client": "^1.0",
         "rnr1721/psr7-server": "^1.0",
         "rnr1721/le7-entify": "^1.0",
         "rnr1721/le7-db-redbean": "^1.0",
         "rnr1721/le7-view-twig": "^1.0",
+        "rnr1721/le7-menu-builder": "^1.0",
         "php-di/php-di": "^7.0",
         "nyholm/psr7": "^1.5"
     },

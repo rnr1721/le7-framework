@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * To use it you must install rnr1721/le7-api-request via composer
+ */
 use Core\Interfaces\ApiRequestInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Core\Factories\HttpClientFactory;

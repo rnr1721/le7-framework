@@ -3,6 +3,7 @@
 return [
     'bundles' => [
         'config' => [],
-        'list' => []
+        'list' => [
+        ]
     ]
 ];
