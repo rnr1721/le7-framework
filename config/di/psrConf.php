@@ -30,6 +30,9 @@ return [
         // File cache by default
         $factory = new SCFactoryGeneric();
         $cachePath = BASE_PATH . DS . 'var' . DS . 'cache';
+        if (!file_exists($cachePath)) {
+            mkdir($cachePath, 0777, true);
+        }
         return $factory->getFileCache($cachePath);
     }),
     SessionInterface::class => factory(function (ContainerInterface $c) {
