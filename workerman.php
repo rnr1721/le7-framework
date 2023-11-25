@@ -23,7 +23,7 @@ define('BASE_PATH', realpath(dirname(__FILE__)));
 define('DS', DIRECTORY_SEPARATOR);
 
 $diCompiledPath = BASE_PATH . DS . 'var' . DS . 'containers';
-$diConfig = BASE_PATH . DS . 'config' . DS . 'di';
+$diConfig = BASE_PATH . DS . 'container';
 
 $loader = require('vendor' . DS . 'autoload.php');
 

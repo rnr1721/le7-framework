@@ -3,9 +3,7 @@
 /.idea/
 /vendor/
 /logs/
-/config/stat_bottom.txt
-/config/stat_middle.txt
-/config/stat_top.txt
+/config
 /public/libs/debugbar/
 /var/cache/*
 /var/containers/proxies/*
