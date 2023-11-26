@@ -30,11 +30,11 @@
         "rnr1721/le7-static-snippets": "^1.0",
         "rnr1721/psr7-server": "^1.0",
         "rnr1721/le7-entify": "^1.0",
-        "rnr1721/le7-db-redbean": "^1.0",
         "rnr1721/le7-view-twig": "^1.0",
         "rnr1721/le7-menu-builder": "^1.0",
         "php-di/php-di": "^7.0",
-        "nyholm/psr7": "^1.5"
+        "nyholm/psr7": "^1.5",
+        "rnr1721/le7-db-redbean": "^1.0"
     },
     "require-dev": {
         "vimeo/psalm": "^5.7",
@@ -54,6 +54,12 @@
         "test": [
             "@phpunit",
             "@psalm"
+        ],
+        "post-install-cmd": [
+            "php vendor/rnr1721/le7-core/src/scripts/init-plugins.php"
+        ],
+        "post-update-cmd": [
+            "php vendor/rnr1721/le7-core/src/scripts/init-plugins.php"
         ],
         "phpunit": "phpunit",
         "psalm": "psalm"
